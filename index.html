@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elevate Coaching — Learn Today, Lead Tomorrow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243460;
+      --gold: #c8973a;
+      --gold-light: #e8b55a;
+      --gold-pale: #fef3e0;
+      --cream: #faf8f3;
+      --white: #ffffff;
+      --text-main: #1a2744;
+      --text-muted: #7a7a7a;
+      --text-light: #a0a0a0;
+      --border: #e8e3d8;
+      --green: #2e7d52;
+      --green-pale: #e8f5e9;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250,248,243,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 36px; height: 36px; background: var(--navy);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-icon svg { width: 20px; height: 20px; }
+    .nav-brand-text { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--navy); letter-spacing: 0.5px; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.3px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-cta {
+      background: var(--gold); color: #fff; border: none;
+      padding: 8px 20px; border-radius: 6px; font-size: 13px;
+      font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #b5872e; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 50%, rgba(200,151,58,0.08) 0%, transparent 60%),
+                        radial-gradient(circle at 80% 20%, rgba(200,151,58,0.06) 0%, transparent 50%);
+    }
+    .hero-inner { position: relative; max-width: 700px; margin: 0 auto; }
+
+    .launch-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(200,151,58,0.15); border: 1px solid rgba(200,151,58,0.35);
+      color: var(--gold-light); font-size: 11px; letter-spacing: 2px;
+      text-transform: uppercase; padding: 5px 16px; border-radius: 30px; margin-bottom: 2rem;
+      animation: fadeDown 0.6s ease both;
+    }
+    .pill-dot {
+      width: 6px; height: 6px; background: var(--gold); border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+    @keyframes fadeDown { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+    .hero-logo-row {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-bottom: 1.25rem;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+    .hero-logo-icon {
+      width: 68px; height: 68px; background: var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .hero-logo-icon svg { width: 38px; height: 38px; }
+    .hero-brand-text { text-align: left; }
+    .hero-brand-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px; font-weight: 600; color: #fff; letter-spacing: 1px;
+    }
+    .hero-brand-text p { font-size: 11px; letter-spacing: 3.5px; color: var(--gold); text-transform: uppercase; margin-top: 3px; }
+
+    .hero-sub {
+      font-size: 15px; color: rgba(255,255,255,0.55); margin-bottom: 2.25rem;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+    .hero-btns {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+    .btn-hero-primary {
+      background: var(--gold); color: #fff; border: none;
+      padding: 13px 32px; border-radius: 8px; font-size: 14px; font-weight: 500;
+      font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .btn-hero-primary:hover { background: #b5872e; transform: translateY(-1px); }
+    .btn-hero-ghost {
+      background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.28);
+      padding: 13px 32px; border-radius: 8px; font-size: 14px;
+      font-family: 'DM Sans', sans-serif; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-hero-ghost:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
+
+    /* ── WRAPPER ── */
+    .page { max-width: 920px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+
+    /* ── INTRO BAND ── */
+    .intro-band {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem 2rem;
+      display: flex; gap: 1.25rem; align-items: flex-start;
+      margin-top: 2.5rem;
+      animation: fadeUp 0.5s ease 0.4s both;
+    }
+    .intro-icon-wrap {
+      width: 48px; height: 48px; background: var(--navy); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .intro-icon-wrap svg { width: 24px; height: 24px; }
+    .intro-band h2 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: var(--navy); margin-bottom: 6px; }
+    .intro-band p { font-size: 13.5px; color: var(--text-muted); line-height: 1.75; }
+
+    /* ── SECTION TITLES ── */
+    .section { margin-top: 3rem; }
+    .section-head {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 1.25rem;
+    }
+    .section-head h2 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; color: var(--navy); }
+    .section-head::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .gold-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+    /* ── EXAM CARDS ── */
+    .exam-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .exam-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem; position: relative; overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .exam-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,39,68,0.08); }
+    .exam-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+    .exam-card.ssc::before { background: var(--navy); }
+    .exam-card.bank::before { background: var(--gold); }
+    .exam-card.state::before { background: var(--green); }
+    .exam-icon-box {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 12px;
+    }
+    .ssc .exam-icon-box { background: #eef0fb; }
+    .bank .exam-icon-box { background: var(--gold-pale); }
+    .state .exam-icon-box { background: var(--green-pale); }
+    .exam-card h3 { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 5px; }
+    .exam-card p { font-size: 12.5px; color: var(--text-muted); line-height: 1.55; }
+    .exam-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+    .exam-pill {
+      font-size: 10.5px; padding: 3px 9px; border-radius: 20px;
+      background: #f3f1ec; color: var(--text-muted); border: 1px solid var(--border);
+    }
+
+    /* ── OFFER BANNER ── */
+    .offer-banner {
+      background: var(--navy); border-radius: var(--radius);
+      padding: 2rem 2.25rem; display: flex; justify-content: space-between;
+      align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .offer-left h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; color: #fff; margin-bottom: 8px; }
+    .offer-left p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.65; max-width: 460px; }
+    .offer-perks { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+    .perk { font-size: 12px; color: var(--gold-light); display: flex; align-items: center; gap: 5px; }
+    .perk::before { content: '✓'; font-weight: 600; color: var(--gold); }
+    .btn-offer {
+      background: var(--gold); color: #fff; border: none; padding: 13px 28px;
+      border-radius: 8px; font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif;
+      cursor: pointer; white-space: nowrap; transition: background 0.2s, transform 0.15s; flex-shrink: 0;
+    }
+    .btn-offer:hover { background: #b5872e; transform: translateY(-1px); }
+
+    /* ── FEATURES ── */
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .feat-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem 1.5rem;
+      display: flex; gap: 14px; align-items: flex-start;
+      transition: box-shadow 0.2s;
+    }
+    .feat-card:hover { box-shadow: 0 4px 16px rgba(26,39,68,0.06); }
+    .feat-icon {
+      width: 42px; height: 42px; border-radius: 10px; background: var(--navy);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .feat-icon svg { width: 20px; height: 20px; }
+    .feat-card h4 { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+    .feat-card p { font-size: 12.5px; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── BATCHES ── */
+    .batch-list { display: flex; flex-direction: column; gap: 10px; }
+    .batch-row {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 1.1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      transition: box-shadow 0.2s;
+    }
+    .batch-row:hover { box-shadow: 0 3px 12px rgba(26,39,68,0.06); }
+    .batch-info h4 { font-size: 14px; font-weight: 500; color: var(--navy); }
+    .batch-info p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .batch-right { text-align: right; flex-shrink: 0; }
+    .batch-tag {
+      display: inline-block; font-size: 10.5px; padding: 3px 10px;
+      border-radius: 20px; margin-bottom: 5px; font-weight: 500;
+    }
+    .tag-soon { background: #eef0fb; color: var(--navy); }
+    .tag-free { background: var(--gold-pale); color: #854f0b; }
+    .batch-date { font-size: 11.5px; color: var(--text-light); }
+
+    /* ── PROMISE ── */
+    .promise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .promise-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem; text-align: center;
+      transition: transform 0.2s;
+    }
+    .promise-card:hover { transform: translateY(-2px); }
+    .promise-num { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 600; }
+    .promise-num.navy { color: var(--navy); }
+    .promise-num.gold { color: var(--gold); }
+    .promise-num.green { color: var(--green); }
+    .promise-label { font-size: 12.5px; color: var(--text-muted); margin-top: 6px; line-height: 1.55; }
+
+    /* ── CTA FOOTER ── */
+    .cta-footer {
+      background: var(--navy); border-radius: var(--radius);
+      padding: 3rem 2rem; text-align: center; margin-top: 3rem;
+    }
+    .cta-footer h2 {
+      font-family: 'Playfair Display', serif; font-size: 26px;
+      font-weight: 500; color: #fff; margin-bottom: 10px;
+    }
+    .cta-footer p { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 2rem; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-cta-primary {
+      background: var(--gold); color: #fff; border: none; padding: 13px 30px;
+      border-radius: 8px; font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .btn-cta-primary:hover { background: #b5872e; }
+    .btn-cta-ghost {
+      background: rgba(255,255,255,0.08); color: #fff;
+      border: 1px solid rgba(255,255,255,0.2); padding: 13px 30px;
+      border-radius: 8px; font-size: 14px; font-family: 'DM Sans', sans-serif; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-cta-ghost:hover { background: rgba(255,255,255,0.14); }
+    .cta-note { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 1.25rem; letter-spacing: 0.5px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 1.5rem 2rem;
+      text-align: center; font-size: 12px; color: var(--text-light);
+      max-width: 920px; margin: 0 auto;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .hero { padding: 3.5rem 1.25rem 3rem; }
+      .hero-brand-text h1 { font-size: 22px; }
+      .exam-grid, .features-grid, .promise-grid { grid-template-columns: 1fr; }
+      .intro-band { flex-direction: column; }
+      .offer-banner { flex-direction: column; align-items: flex-start; }
+      .page { padding: 0 1rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-brand" href="#">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 22 22" fill="none">
+          <path d="M11 3L19 8L11 13L3 8Z" fill="white" fill-opacity="0.9"/>
+          <path d="M7 10.5L7 16C7 16 8.8 18.5 11 18.5C13.2 18.5 15 16 15 16L15 10.5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="nav-brand-text">Elevate Coaching</span>
+    </a>
+    <div class="nav-links">
+      <a href="#exams">Exams</a>
+      <a href="#approach">Approach</a>
+      <a href="#batches">Batches</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="#contact">Free demo class</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="launch-pill"><span class="pill-dot"></span> Newly launched · Inaugural batch open</div>
+      <div class="hero-logo-row">
+        <div class="hero-logo-icon">
+          <svg viewBox="0 0 38 38" fill="none">
+            <path d="M19 5L33 13L19 21L5 13Z" fill="white" fill-opacity="0.92"/>
+            <path d="M5 13L5 23" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="5" cy="24" r="2.5" fill="white"/>
+            <path d="M12 17L12 27C12 27 14.8 31 19 31C23.2 31 26 27 26 27L26 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="19" y="16" text-anchor="middle" fill="#c8973a" font-size="7.5" font-weight="bold" font-family="Georgia, serif">E</text>
+          </svg>
+        </div>
+        <div class="hero-brand-text">
+          <h1>ELEVATE COACHING</h1>
+          <p>Learn Today, Lead Tomorrow</p>
+        </div>
+      </div>
+      <p class="hero-sub">A new institute built for one purpose — your government job</p>
+      <div class="hero-btns">
+        <button class="btn-hero-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enroll in inaugural batch</button>
+        <button class="btn-hero-ghost" onclick="document.getElementById('exams').scrollIntoView({behavior:'smooth'})">Explore courses</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="page">
+
+    <!-- INTRO -->
+    <div class="intro-band">
+      <div class="intro-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L14.5 8.5H21.5L16 12.5L18.5 19.5L12 15.5L5.5 19.5L8 12.5L2.5 8.5H9.5Z" fill="#c8973a"/>
+        </svg>
+      </div>
+      <div>
+        <h2>A fresh start, built right</h2>
+        <p>Elevate Coaching is a newly established institute founded by educators passionate about government exam preparation. We may be new, but our approach is not — structured curriculum, small batch sizes for personal attention, and a faculty that genuinely invests in every student's success. Join us at the ground floor and grow together.</p>
+      </div>
+    </div>
+
+    <!-- EXAMS -->
+    <section class="section" id="exams">
+      <div class="section-head">
+        <span class="gold-dot"></span>
+        <h2>What we prepare you for</h2>
+      </div>
+      <div class="exam-grid">
+        <div class="exam-card ssc">
+          <div class="exam-icon-box">📋</div>
+          <h3>SSC Exams</h3>
+          <p>Staff Selection Commission — from foundation to advanced level with complete syllabus coverage.</p>
+          <div class="exam-pills">
+            <span class="exam-pill">CGL</span>
+            <span class="exam-pill">CHSL</span>
+            <span class="exam-pill">MTS</span>
+            <span class="exam-pill">CPO</span>
+            <span class="exam-pill">JE</span>
+          </div>
+        </div>
+        <div class="exam-card bank">
+          <div class="exam-icon-box">🏦</div>
+          <h3>Banking Exams</h3>
+          <p>Prelims, Mains and Interview — end-to-end bank exam preparation under one roof.</p>
+          <div class="exam-pills">
+            <span class="exam-pill">IBPS PO</span>
+            <span class="exam-pill">SBI PO</span>
+            <span class="exam-pill">RRB</span>
+            <span class="exam-pill">RBI Grade B</span>
+          </div>
+        </div>
+        <div class="exam-card state">
+          <div class="exam-icon-box">🗂️</div>
+          <h3>State Exams</h3>
+          <p>State-level competitive exams and railways recruitment boards covered in full.</p>
+          <div class="exam-pills">
+            <span class="exam-pill">State PSC</span>
+            <span class="exam-pill">NTPC</span>
+            <span class="exam-pill">Group D</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFFER -->
+    <section class="section">
+      <div class="offer-banner">
+        <div class="offer-left">
+          <h3>Inaugural offer — limited seats</h3>
+          <p>Be among the founding students at Elevate Coaching and unlock exclusive launch benefits. Smaller batches mean more direct attention from faculty from day one.</p>
+          <div class="offer-perks">
+            <span class="perk">Discounted fees</span>
+            <span class="perk">Free study material</span>
+            <span class="perk">Free demo class</span>
+            <span class="perk">Small batch size</span>
+          </div>
+        </div>
+        <button class="btn-offer" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Claim offer →</button>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section class="section" id="approach">
+      <div class="section-head">
+        <span class="gold-dot"></span>
+        <h2>Our approach</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="7.5" r="3.5" stroke="white" stroke-width="1.5"/>
+              <path d="M3 18c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Personal attention</h4>
+            <p>Small batch sizes so every student gets direct, regular interaction with faculty — not just a seat in a crowded hall.</p>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 20 20" fill="none">
+              <path d="M3 5H17M3 10H12M3 15H14" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Structured curriculum</h4>
+            <p>Topic-by-topic study plan aligned to the latest exam patterns, with dedicated time for each subject.</p>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="3" width="16" height="11" rx="2.5" stroke="white" stroke-width="1.5"/>
+              <path d="M7 18H13" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Offline + online classes</h4>
+            <p>Attend in-centre or access recorded sessions any time — so you never miss a lesson.</p>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">
+            <svg viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="7.5" stroke="white" stroke-width="1.5"/>
+              <path d="M10 5.5V10L13 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Regular mock tests</h4>
+            <p>Timed practice tests with detailed solutions and individual performance feedback after every test.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BATCHES -->
+    <section class="section" id="batches">
+      <div class="section-head">
+        <span class="gold-dot"></span>
+        <h2>Inaugural batches starting soon</h2>
+      </div>
+      <div class="batch-list">
+        <div class="batch-row">
+          <div class="batch-info">
+            <h4>SSC CGL — Foundation Batch</h4>
+            <p>Quantitative Aptitude · Reasoning · English · General Awareness</p>
+          </div>
+          <div class="batch-right">
+            <div><span class="batch-tag tag-free">Free demo</span></div>
+            <div class="batch-date">Starting April 2026</div>
+          </div>
+        </div>
+        <div class="batch-row">
+          <div class="batch-info">
+            <h4>IBPS PO / Clerk — Complete Batch</h4>
+            <p>Prelims + Mains + Interview preparation</p>
+          </div>
+          <div class="batch-right">
+            <div><span class="batch-tag tag-soon">Enrolling now</span></div>
+            <div class="batch-date">Starting May 2026</div>
+          </div>
+        </div>
+        <div class="batch-row">
+          <div class="batch-info">
+            <h4>State PSC — Weekend Batch</h4>
+            <p>Saturday & Sunday — ideal for working aspirants</p>
+          </div>
+          <div class="batch-right">
+            <div><span class="batch-tag tag-soon">Enrolling now</span></div>
+            <div class="batch-date">Starting May 2026</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMISE -->
+    <section class="section">
+      <div class="section-head">
+        <span class="gold-dot"></span>
+        <h2>Our commitment to you</h2>
+      </div>
+      <div class="promise-grid">
+        <div class="promise-card">
+          <div class="promise-num navy">15–20</div>
+          <div class="promise-label">Students per batch for focused, personal learning</div>
+        </div>
+        <div class="promise-card">
+          <div class="promise-num gold">24 hrs</div>
+          <div class="promise-label">Doubt resolution — no question goes unanswered</div>
+        </div>
+        <div class="promise-card">
+          <div class="promise-num green">Free</div>
+          <div class="promise-label">Demo class for every aspirant, no strings attached</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-footer" id="contact">
+      <h2>Begin your preparation today</h2>
+      <p>Seats are limited for inaugural batches — reach out and we'll help you get started</p>
+      <div class="cta-btns">
+        <button class="btn-cta-primary">Book free demo class</button>
+        <button class="btn-cta-ghost">Ask about fees</button>
+      </div>
+      <p class="cta-note">No prior registration fee &nbsp;·&nbsp; Free demo &nbsp;·&nbsp; Seats limited</p>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2026 Elevate Coaching. All rights reserved. &nbsp;·&nbsp; Learn Today, Lead Tomorrow
+  </footer>
+
+</body>
+</html>
